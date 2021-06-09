@@ -7,4 +7,6 @@ import br.com.fiap.traveller.models.Hotel;
 public interface HotelDao extends GenericDao<Hotel, Integer> {
 	
 	List<Hotel> searchForAcceptableDistance(Double distance);
+	List<Hotel> searchByName(String name);
+	
 }

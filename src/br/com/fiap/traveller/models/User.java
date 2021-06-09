@@ -11,8 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name = "TB_USUARIO")
+@Entity
+@Table(name = "TB_USUARIO")
 @SequenceGenerator(name = "usuarios", sequenceName = "SQ_TB_USUARIO", allocationSize = 1)
 public class User {
 	@Id

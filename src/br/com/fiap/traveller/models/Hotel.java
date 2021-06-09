@@ -13,8 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name = "TB_HOTEL")
+@Entity
+@Table(name = "TB_HOTEL")
 @SequenceGenerator(name = "hotel", sequenceName = "SQ_TB_HOTEL", allocationSize = 1)
 public class Hotel {
 	

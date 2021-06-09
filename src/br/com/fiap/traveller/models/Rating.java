@@ -8,8 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name = "TB_AVALIACAO")
+@Entity
+@Table(name = "TB_AVALIACAO")
 @SequenceGenerator(name = "avaliacao", sequenceName = "SQ_TB_AVALIACAO", allocationSize = 1)
 public class Rating {
 	

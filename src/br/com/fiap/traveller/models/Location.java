@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name = "TB_LOCALIZACAO")
+@Entity
+@Table(name = "TB_LOCALIZACAO")
 @SequenceGenerator(name = "localizacao", sequenceName = "SQ_TB_LOCALIZACAO", allocationSize = 1)
 public class Location {
 	

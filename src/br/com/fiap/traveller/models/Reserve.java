@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-@Entity(name = "TB_RESERVA")
+@Entity
+@Table(name = "TB_RESERVA")
 @SequenceGenerator(name = "reservas", sequenceName = "SQ_TB_RESERVA")
 public class Reserve {
 	
