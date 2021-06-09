@@ -1,0 +1,10 @@
+package br.com.fiap.traveller.dao;
+
+import java.util.List;
+
+import br.com.fiap.traveller.models.Hotel;
+
+public interface HotelDao extends GenericDao<Hotel, Integer> {
+	
+	List<Hotel> searchForAcceptableDistance(Double distance);
+}
