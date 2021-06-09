@@ -10,7 +10,7 @@ import br.com.fiap.traveller.exception.EntityNotFoundException;
 
 public abstract class GenericDaoImpl<E, K> implements GenericDao<E, K>{
 	
-	private EntityManager em;
+	protected EntityManager em;
 	private Class<E> clazz;
 	
 	@SuppressWarnings("all")
