@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity(name = "TB_RESERVA")
 @SequenceGenerator(name = "reservas", sequenceName = "SQ_TB_RESERVA")
@@ -21,18 +19,16 @@ public class Reserve {
 	@Id
 	@Column(name = "cd_reserva")
 	@GeneratedValue(generator = "reservas", strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Integer id;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_entrada")
 	private LocalDate checkIn;
 	
-	@Temporal(TemporalType.DATE)
 	@Column(name = "dt_saida")
 	private LocalDate checkOut;
 	
 	@ManyToOne
-	@JoinColumn(name = "cd_user", nullable = false)
+	@JoinColumn(name = "cd_usuario", nullable = false)
 	private User user;
 	
 	@ManyToOne
@@ -45,7 +41,7 @@ public class Reserve {
 	public Reserve() {
 	}
 
-	public Reserve(Long id, LocalDate checkIn, LocalDate checkOut, User user, Hotel hotel, BigDecimal total) {
+	public Reserve(Integer id, LocalDate checkIn, LocalDate checkOut, User user, Hotel hotel, BigDecimal total) {
 		this.id = id;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
@@ -53,12 +49,26 @@ public class Reserve {
 		this.hotel = hotel;
 		this.total = total;
 	}
+	
+	public Reserve(LocalDate checkIn, LocalDate checkOut, User user, Hotel hotel, BigDecimal total) {
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.user = user;
+		this.hotel = hotel;
+		this.total = total;
+	}
+	
+	public Reserve(LocalDate checkIn, LocalDate checkOut, BigDecimal total) {
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.total = total;
+	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

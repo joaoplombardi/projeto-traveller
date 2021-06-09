@@ -16,7 +16,7 @@ public class Rating {
 	@Id
 	@GeneratedValue(generator = "avaliacao", strategy = GenerationType.SEQUENCE)
 	@Column(name = "cd_avaliacao")
-	private Long id;
+	private Integer id;
 	
 	@Column(name = "vl_nota", nullable = false)
 	private Double value;
@@ -35,7 +35,7 @@ public class Rating {
 	public Rating() {
 	}
 
-	public Rating(Long id, Double value, String comment, User user, Hotel hotel) {
+	public Rating(Integer id, Double value, String comment, User user, Hotel hotel) {
 		super();
 		this.id = id;
 		this.value = value;
@@ -43,12 +43,24 @@ public class Rating {
 		this.user = user;
 		this.hotel = hotel;
 	}
+	
+	public Rating(Double value, String comment, User user, Hotel hotel) {
+		this.value = value;
+		this.comment = comment;
+		this.user = user;
+		this.hotel = hotel;
+	}
+	
+	public Rating(Double value, String comment) {
+		this.value = value;
+		this.comment = comment;
+	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

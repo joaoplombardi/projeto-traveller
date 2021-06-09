@@ -3,14 +3,15 @@ package br.com.fiap.traveller.models;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity(name = "TB_HOTEL")
@@ -20,7 +21,7 @@ public class Hotel {
 	@Id 
 	@Column(name = "cd_hotel") 
 	@GeneratedValue(generator = "hotel", strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Integer id;
 	
 	@Column(name = "nm_hotel", nullable = false, length = 60)
 	private String name;
@@ -40,20 +41,50 @@ public class Hotel {
 	@Column(name = "vl_distancia_avpaulista", nullable = false)
 	private Double avPaulistaDistance;
 	
-	@OneToMany
-	@JoinTable(name = "TB_AVALIACAO",
-			   joinColumns = @JoinColumn(name = "cd_hotel"))
+	@OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Rating> rating;
 	
-	@OneToMany
-	@JoinTable(name = "TB_RESERVA",
-			   joinColumns = @JoinColumn(name = "cd_hotel"))
+	@OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Reserve> reserves;
+	
+	@OneToOne(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Location location;
+	
 	public Hotel() {
 	}
 	
+	public Hotel(Integer id,
+			String name,
+			String description,
+			BigDecimal value,
+			String link,
+			String neighbourhood
+			) {
+		
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.value = value;
+		this.link = link;
+		this.neighbourhood = neighbourhood;
+	}
+	
+	public Hotel(
+			String name,
+			String description,
+			BigDecimal value,
+			String link,
+			String neighbourhood
+			) {
+		
+		this.name = name;
+		this.description = description;
+		this.value = value;
+		this.link = link;
+		this.neighbourhood = neighbourhood;
+	}
 
-	public Hotel(Long id,
+	public Hotel(Integer id,
 			String name,
 			String description,
 			BigDecimal value,
@@ -71,12 +102,29 @@ public class Hotel {
 		this.avPaulistaDistance = avPaulistaDistance;
 		this.rating = rating;
 	}
+	
+	public Hotel(
+			String name,
+			String description,
+			BigDecimal value,
+			String link,
+			String neighbourhood,
+			Double avPaulistaDistance
+			) {
+		
+		this.name = name;
+		this.description = description;
+		this.value = value;
+		this.link = link;
+		this.neighbourhood = neighbourhood;
+		this.avPaulistaDistance = avPaulistaDistance;
+	}
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -121,4 +169,21 @@ public class Hotel {
 	public void setRating(List<Rating> rating) {
 		this.rating = rating;
 	}
+
+	public List<Reserve> getReserves() {
+		return reserves;
+	}
+
+	public void setReserves(List<Reserve> reserves) {
+		this.reserves = reserves;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
 }

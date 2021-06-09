@@ -1,8 +1,10 @@
 package br.com.fiap.traveller.models;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +19,7 @@ public class Location {
 	@Id
 	@Column(name = "cd_localizacao")
 	@GeneratedValue(generator = "localizacao", strategy = GenerationType.SEQUENCE)
-	private Long id;
+	private Integer id;
 	
 	@Column(name = "nm_logradouro", nullable = false, length = 70)
 	private String name;
@@ -28,8 +30,8 @@ public class Location {
 	@Column(name = "ds_maps")
 	private String maps;
 	
-	@OneToOne
-	@JoinColumn(name = "cd_hotel", nullable = false)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name="cd_hotel", nullable = false, unique = true)
 	private Hotel hotel;
 	
 	
@@ -37,7 +39,7 @@ public class Location {
 	public Location() {
 	}
 
-	public Location(Long id, String name, Integer number, String maps, Hotel hotel) {
+	public Location(Integer id, String name, Integer number, String maps, Hotel hotel) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,12 +47,25 @@ public class Location {
 		this.maps = maps;
 		this.hotel = hotel;
 	}
+	
+	public Location(String name, Integer number, String maps, Hotel hotel) {
+		this.name = name;
+		this.number = number;
+		this.maps = maps;
+		this.hotel = hotel;
+	}
+	
+	public Location(String name, Integer number, String maps) {
+		this.name = name;
+		this.number = number;
+		this.maps = maps;
+	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
