@@ -1,6 +1,7 @@
 package br.com.fiap.traveller.dao.impl;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -24,12 +25,12 @@ public class ReserveDaoImpl extends GenericDaoImpl<Reserve, Integer> implements 
 	}
 
 	@Override
-	public Reserve activeForAUser(User user) {
-		//TODO
-		TypedQuery<Reserve> query = 
-				em.createQuery("from Reserve r where r.user = :id and r.checkOut > :date", Reserve.class);
-		query.setParameter("id", user.getId());
-		query.setParameter("date", LocalDate.now());
-		return query.getSingleResult();
+	public List<Reserve> findByUser(User user) {
+		TypedQuery<Reserve> allReserveUser = em.createNamedQuery("from Reserve r where r.user = :u", Reserve.class);
+		allReserveUser.setParameter("u", user.getId());
+		return allReserveUser.getResultList();
 	}
+
+
+
 }

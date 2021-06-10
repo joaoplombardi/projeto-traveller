@@ -16,7 +16,7 @@ import br.com.fiap.traveller.models.Reserve;
 import br.com.fiap.traveller.models.User;
 import br.com.fiap.traveller.singleton.EntityManagerSingleton;
 
-public class TestView {
+public class CreateView {
 	
 	public static void main(String[] args) {
 		//Criação dos Models
